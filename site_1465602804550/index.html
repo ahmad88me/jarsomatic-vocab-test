@@ -57,9 +57,9 @@
     </div>
     <div class="collapse navbar-collapse">
       <ul class="nav navbar-nav">
-        <li ><a href="./index.html">Vocabularies</a></li>
+        <li class="active"><a href="#">Vocabularies</a></li>
         <li><a href="http://rohub.linkeddata.es">Research Objects</a></li>
-        <li class="active"><a href="#">Vocabulary report</a></li>
+        <li><a href="report.html">Vocabulary report</a></li>
       </ul>
     </div><!--/.nav-collapse -->
   </div>
@@ -68,38 +68,34 @@
 
       <!-- Jumbotron -->
       <div class="jumbotron">
-        <h1>Vocabulary report</h1>
-        <p class="lead">Below you can see the status report for the vocabularies included in the last generation of vocab.linkeddata.es.</a></p>
-      </div><table class="table table-hover table-responsive">
+        <h1>vocab.linkeddata.es</h1>
+        <p class="lead">Here you can find the list of vocabularies that the <a href="http://www.oeg-upm.net">Ontology Engineering Group (OEG)</a> is developing and publishing on the Web.</a></p>
+      </div>
+      <hr>
+<div class="row"> 
+<div class="ui-widget">
+<div class="col-md-3" > 
+<p class="text-right"><label for="tags">Filter by title or domain: </label></p>
+</div>
+<div class="col-md-8" > 
+<input class="form-control" id="tags" >
+<button id="remButt" class="label label-default" onclick="showRows();" style="font-size: 75%; font-weight: bold; line-height: 1; display: none;"><span class="submit glyphicon glyphicon-remove"></span>  Remove filter</button>
+</div>
+</div>
+</div>
+<br>
+<table id="tablesorter-demo" class="tablesorter table table-hover table-responsive">
 <thead>
 <tr>
-<th class="col-md-4">Ontology</th>
-<th class="col-md-2">Status</th>
-<th class="col-md-6">Problem</th>
+<th class="col-md-2">Ontology</th>
+<th class="col-md-2">Serialization</th>
+<th class="col-md-1">License</th>
+<th class="col-md-1">Language</th>
+<th class="col-md-2">Domain</th>
+<th class="col-md-4">Description</th>
 </tr>
 </thead>
 <tbody>
-  <tr>
-<td><a href = "http://purl.org/net/p-plan" target="_blank">http://purl.org/net/p-plan</a></td>
-<td>
-<span class="label label-success">Sucess</span>
-</td>
-<td>No errors</td>
-</tr>
-  <tr>
-<td><a href = "http://purl.org/net/wf-motifs" target="_blank">http://purl.org/net/wf-motifs</a></td>
-<td>
-<span class="label label-success">Sucess</span>
-</td>
-<td>No errors</td>
-</tr>
-  <tr>
-<td><a href = "http://purl.org/net/wf-invocation" target="_blank">http://purl.org/net/wf-invocation</a></td>
-<td>
-<span class="label label-success">Sucess</span>
-</td>
-<td>No errors</td>
-</tr>
 </tbody></table>
 <hr>
       <footer class="footer">
@@ -119,5 +115,49 @@
       </div>
       </footer>
     </div> <!-- /container -->
+<script>
+$(function() {
+var availableTags = [
+];
+$( "#tags" ).autocomplete({
+source: availableTags,
+select: function(event, ui) {
+hideRows(ui.item.value);
+}
+});
+});
+</script>
+<script>
+function hideRows(text) {
+index = 1;
+tr = document.getElementById('tr'+index);
+while (tr!=null){
+valores = document.getElementById('inp'+index).value;
+if (valores.indexOf(text+'--')==-1){
+tr.style.display='none';
+}
+index++;
+tr = document.getElementById('tr'+index);
+}
+document.getElementById('remButt').style.display='';
+}
+
+function showRows() {	
+index = 1;
+tr = document.getElementById('tr'+index);
+while (tr!=null){
+tr.style.display='';
+index++;
+tr = document.getElementById('tr'+index);
+}
+butt = document.getElementById('remButt').style.display='none';
+}
+</script><script>
+(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){ (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+})(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+ga('create', 'UA-48904250-1', 'linkeddata.es');
+ga('send', 'pageview');
+</script>
   </body>
 </html>
